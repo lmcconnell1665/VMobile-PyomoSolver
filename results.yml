@@ -1,0 +1,102 @@
+{
+    "Problem": [
+        {
+            "Lower bound": 7000.0,
+            "Name": "unknown",
+            "Number of constraints": 116,
+            "Number of nonzeros": 1060,
+            "Number of objectives": 1,
+            "Number of variables": 190,
+            "Sense": "minimize",
+            "Upper bound": 7000.0
+        }
+    ],
+    "Solution": [
+        {
+            "number of solutions": 1,
+            "number of solutions displayed": 1
+        },
+        {
+            "Constraint": "No values",
+            "Gap": 0.0,
+            "Message": null,
+            "Objective": {
+                "OBJ": {
+                    "Value": 7000.0
+                }
+            },
+            "Problem": {},
+            "Status": "feasible",
+            "Variable": {
+                "X[2,1,1,1]": {
+                    "Value": 500.0
+                },
+                "X[2,1,1,2]": {
+                    "Value": 500.0
+                },
+                "X[2,1,2,2]": {
+                    "Value": 200.0
+                },
+                "X[2,2,2,1]": {
+                    "Value": 550.0
+                },
+                "X[2,2,2,2]": {
+                    "Value": 300.0
+                },
+                "X[2,2,3,1]": {
+                    "Value": 450.0
+                },
+                "X[2,2,3,2]": {
+                    "Value": 700.0
+                },
+                "X[2,3,3,1]": {
+                    "Value": 800.0
+                },
+                "X[2,3,3,2]": {
+                    "Value": 550.000000000001
+                },
+                "X[2,4,2,1]": {
+                    "Value": 200.0
+                },
+                "Z[2,1,2,1]": {
+                    "Value": 250.0
+                },
+                "Z[2,1,2,2]": {
+                    "Value": 250.0
+                },
+                "Z[2,4,3,1]": {
+                    "Value": 250.0
+                },
+                "Z[2,4,3,2]": {
+                    "Value": 250.0
+                },
+                "bin[1,1]": {
+                    "Value": 1.0
+                },
+                "bin[2,2]": {
+                    "Value": 0.5
+                },
+                "bin[2,3]": {
+                    "Value": 0.5
+                },
+                "bin[3,1]": {
+                    "Value": 1.0
+                }
+            }
+        }
+    ],
+    "Solver": [
+        {
+            "Error rc": 0,
+            "Statistics": {
+                "Branch and bound": {
+                    "Number of bounded subproblems": 0,
+                    "Number of created subproblems": 0
+                }
+            },
+            "Status": "ok",
+            "Termination condition": "optimal",
+            "Time": 0.08160901069641113
+        }
+    ]
+}
