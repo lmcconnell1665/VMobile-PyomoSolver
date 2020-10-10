@@ -59,7 +59,7 @@ model.UB=Param(model.i, model.t, initialize=UB_init)
             
 #Variables
 model.X=Var(model.i, model.j, model.k, model.t, within=NonNegativeReals)
-model.bin=Var(model.i, model.k, within=NonNegativeReals)
+model.bin=Var(model.i, model.k, domain=Boolean)
 model.Z=Var(model.i, model.j, model.k, model.t, within=NonNegativeReals)
             
             
