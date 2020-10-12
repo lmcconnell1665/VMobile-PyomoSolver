@@ -73,7 +73,7 @@ def objectivefunction_rule(model):
             for i in model.i) for j in model.j) for k in model.k) for t in model.t)
 model.OBJ = Objective(rule = objectivefunction_rule, sense = minimize)
 
-#instance = model.create_instance()
+instance = model.create_instance()
 
 #CONSTRAINTS
 #Capacity
@@ -117,5 +117,5 @@ model.Constraint_z_max_function = Constraint(model.i, model.k, model.t, rule = z
 
 #Forecasted Volume
 def forecast_volume_rule(model,j,t):
-    return sum( sum( model.X[i,j,k,t] for i in model.i) for k in model.k) <= model.d[j,t]
+    return sum( sum( model.X[i,j,k,t] for i in model.i) for k in model.k) >= model.d[j,t]
 model.Constraint_forecast_volume = Constraint(model.j, model.t, rule = forecast_volume_rule)
