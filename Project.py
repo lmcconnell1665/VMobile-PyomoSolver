@@ -92,10 +92,10 @@ model.ConstraintLowerPrice = Constraint(model.i, model.k, rule = lower_price_int
             
 def upper_price_interval_rule(model,i,k):
     return model.bin[i,k] * model.UT[i,k] >= sum( sum( model.X[i,j,k,t] for t in model.t) for j in model.j)
-model.ConstraintUpperPrice = Constraint(model.i, model.k, rule = lower_price_interval_rule)
+model.ConstraintUpperPrice = Constraint(model.i, model.k, rule = upper_price_interval_rule)
             
 def binary_sum_rule(model,i):
-    return sum( model.bin[i,k] for k in model.k) == 1
+    return sum( model.bin[i,k] for k in model.k) <= 1
 model.ConstraintBinarySum = Constraint(model.i, rule = binary_sum_rule)
             
 #z-Variable
