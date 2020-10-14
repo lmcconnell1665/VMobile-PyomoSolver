@@ -1,3 +1,10 @@
+"""
+BZAN 556 Project 2
+Luke McConell, Price McGinnis, Michael Sanders, Tim Hengst
+October 2020
+"""
+
+
 from pyomo.environ import *
 import os
 import math
