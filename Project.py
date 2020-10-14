@@ -60,7 +60,7 @@ model.UB=Param(model.i, model.t, initialize=UB_init)
 #Variables
 model.X=Var(model.i, model.j, model.k, model.t, within=NonNegativeReals)
 model.bin=Var(model.i, model.k, domain=Boolean)
-model.Z=Var(model.i, model.j, model.k, model.t, within=NonNegativeReals)
+#model.Z=Var(model.i, model.j, model.k, model.t, within=NonNegativeReals)
             
             
 #Expressions
@@ -69,20 +69,20 @@ model.Z=Var(model.i, model.j, model.k, model.t, within=NonNegativeReals)
 #OBJECTIVE
 def objectivefunction_rule(model):
     return sum( sum( sum( sum( 
-                    model.Z[i,j,k,t] * (model.p[i,j,k,t] + model.pen[i,j,t]) 
+                    model.X[i,j,k,t] * (model.p[i,j,k,t] + model.pen[i,j,t]) 
             for i in model.i) for j in model.j) for k in model.k) for t in model.t)
 model.OBJ = Objective(rule = objectivefunction_rule, sense = minimize)
 
-instance = model.create_instance()
+#instance = model.create_instance()
 
 #CONSTRAINTS
 #Capacity
 def upper_capacity_rule(model,i,t):
-    return sum( sum( model.Z[i,j,k,t] for j in model.j) for k in model.k) <= model.UB[i,t]
+    return sum( sum( model.X[i,j,k,t] for j in model.j) for k in model.k) <= model.UB[i,t]
 model.ConstraintUpperCapacity = Constraint(model.i, model.t, rule = upper_capacity_rule)
             
 def lower_capacity_rule(model,i,t):
-    return sum( sum( model.Z[i,j,k,t] for j in model.j) for k in model.k) >= model.LB[i,t]
+    return sum( sum( model.X[i,j,k,t] for j in model.j) for k in model.k) >= model.LB[i,t]
 model.ConstraintLowerCapacity = Constraint(model.i, model.t, rule = lower_capacity_rule)
             
 #Price Intervals
@@ -99,21 +99,21 @@ def binary_sum_rule(model,i):
 model.ConstraintBinarySum = Constraint(model.i, rule = binary_sum_rule)
             
 #z-Variable
-def z_min_bound_rule(model,i,k,t):
-    return sum( model.Z[i,j,k,t] for j in model.j) <= model.bin[i,k] * model.UB[i,t]
-model.Constraint_z_min_bound = Constraint(model.i, model.k, model.t, rule = z_min_bound_rule)
+# def z_min_bound_rule(model,i,k,t):
+#     return sum( model.Z[i,j,k,t] for j in model.j) <= model.bin[i,k] * model.UB[i,t]
+# model.Constraint_z_min_bound = Constraint(model.i, model.k, model.t, rule = z_min_bound_rule)
             
-def z_max_bound_rule(model,i,k,t):
-    return sum( model.Z[i,j,k,t] for j in model.j) >= model.bin[i,k] * model.LB[i,t]
-model.Constraint_z_max_bound = Constraint(model.i, model.k, model.t, rule = z_max_bound_rule)
+# def z_max_bound_rule(model,i,k,t):
+#     return sum( model.Z[i,j,k,t] for j in model.j) >= model.bin[i,k] * model.LB[i,t]
+# model.Constraint_z_max_bound = Constraint(model.i, model.k, model.t, rule = z_max_bound_rule)
             
-def z_min_function_rule(model,i,k,t):
-    return sum( model.Z[i,j,k,t] for j in model.j) <= sum( model.X[i,j,k,t] for j in model.j) - model.LB[i,t] * (1 - model.bin[i,k])
-model.Constraint_z_min_function = Constraint(model.i, model.k, model.t, rule = z_min_function_rule)
+# def z_min_function_rule(model,i,k,t):
+#     return sum( model.Z[i,j,k,t] for j in model.j) <= sum( model.X[i,j,k,t] for j in model.j) - model.LB[i,t] * (1 - model.bin[i,k])
+# model.Constraint_z_min_function = Constraint(model.i, model.k, model.t, rule = z_min_function_rule)
             
-def z_max_function_rule(model,i,k,t):
-    return sum( model.Z[i,j,k,t] for j in model.j) >= sum( model.X[i,j,k,t] for j in model.j) - model.UB[i,t] * (1 - model.bin[i,k])
-model.Constraint_z_max_function = Constraint(model.i, model.k, model.t, rule = z_max_function_rule)
+# def z_max_function_rule(model,i,k,t):
+#     return sum( model.Z[i,j,k,t] for j in model.j) >= sum( model.X[i,j,k,t] for j in model.j) - model.UB[i,t] * (1 - model.bin[i,k])
+# model.Constraint_z_max_function = Constraint(model.i, model.k, model.t, rule = z_max_function_rule)
 
 #Forecasted Volume
 def forecast_volume_rule(model,j,t):
